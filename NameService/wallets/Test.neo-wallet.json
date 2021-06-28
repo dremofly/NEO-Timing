@@ -1,0 +1,29 @@
+{
+  "name": "Test",
+  "version": "1.0",
+  "scrypt": {
+    "n": 16384,
+    "r": 8,
+    "p": 8,
+    "size": 64
+  },
+  "accounts": [
+    {
+      "address": "NSJ7viAU2At4tTLfQP83fEb1xRuGvqVqDy",
+      "label": "Default account",
+      "isDefault": true,
+      "lock": false,
+      "key": "6PYNsn7hBBSFisvAtZuAuagTkpcdhFN2qGhgznL3o5CGFBYFkzNP6RYjnj",
+      "contract": {
+        "script": "DCECEg1mUm94DqWzR2XCt0LSxXVr73d4G9YVGWWFrjjHqr1BVuezJw==",
+        "parameters": [
+          {
+            "name": "signature",
+            "type": "Signature"
+          }
+        ],
+        "deployed": false
+      }
+    }
+  ]
+}

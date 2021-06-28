@@ -1,0 +1,10 @@
+[
+  {
+    "contract": "NameService",
+    "operation": "register",
+    "args": [
+      "hat",
+      "0xaab86d7c4f37dbac7ae2427cfafdca3c6947dad3"
+    ]
+  }
+]

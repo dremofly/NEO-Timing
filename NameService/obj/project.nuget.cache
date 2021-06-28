@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "NN4jLzAWPaDthlVrBIbX34Z8asPx3gP9MM1MPq/N/pxUqHXZB3qJgGz1SzL9+NsXuZQiW2hig4uBl9KQFj0f6Q==",
+  "success": true,
+  "projectFilePath": "/Users/qinzilie/NameService/NameService.csproj",
+  "expectedPackageFiles": [
+    "/Users/qinzilie/.nuget/packages/neo.smartcontract.framework/3.0.0-rc3/neo.smartcontract.framework.3.0.0-rc3.nupkg.sha512",
+    "/Users/qinzilie/.nuget/packages/neo3.compiler.csharp.dev/3.0.0-rc3/neo3.compiler.csharp.dev.3.0.0-rc3.nupkg.sha512"
+  ],
+  "logs": []
+}

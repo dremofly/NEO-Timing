@@ -1,0 +1,12 @@
+/Users/qinzilie/NameService/bin/Debug/net5.0/NameService.deps.json
+/Users/qinzilie/NameService/bin/Debug/net5.0/NameService.dll
+/Users/qinzilie/NameService/bin/Debug/net5.0/ref/NameService.dll
+/Users/qinzilie/NameService/bin/Debug/net5.0/NameService.pdb
+/Users/qinzilie/NameService/obj/Debug/net5.0/NameService.csproj.AssemblyReference.cache
+/Users/qinzilie/NameService/obj/Debug/net5.0/NameService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/qinzilie/NameService/obj/Debug/net5.0/NameService.AssemblyInfoInputs.cache
+/Users/qinzilie/NameService/obj/Debug/net5.0/NameService.AssemblyInfo.cs
+/Users/qinzilie/NameService/obj/Debug/net5.0/NameService.csproj.CoreCompileInputs.cache
+/Users/qinzilie/NameService/obj/Debug/net5.0/NameService.dll
+/Users/qinzilie/NameService/obj/Debug/net5.0/ref/NameService.dll
+/Users/qinzilie/NameService/obj/Debug/net5.0/NameService.pdb
