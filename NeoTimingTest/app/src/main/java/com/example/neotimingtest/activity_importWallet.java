@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -17,12 +21,24 @@ public class activity_importWallet extends AppCompatActivity {
 //    public static final String K_STR = "k_str";
 //    public static final String K_TITLE = "k_titile";
 //    public static final String K_SUB_TITLE =  "k_sub_title";
-
+    private static final String TAG = "IMPORT WALLET";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_wallet);
+        Button uploadPrivateKeyButton = findViewById(R.id.upload_private_key_button);
+        uploadPrivateKeyButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(activity_createWallet.this, activity_createWallet.class);
+                //startActivity(intent);
+                EditText wifText = findViewById(R.id.wiftext);
+                Log.v(TAG, "input private key wif: " + wifText.getText().toString());
+                Toast.makeText(activity_importWallet.this, wifText.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 //    private  void gotInput(){
