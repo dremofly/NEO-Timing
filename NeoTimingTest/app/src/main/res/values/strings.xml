@@ -4,4 +4,6 @@
     <string name="button_create">Create a wallet</string>
     <string name="Logo_homepage">NeoTiming</string>
     <string name="Slogan">Manage your own time in NeoTiming...</string>
+    <string name="showWorkTime">Work Time : 0 mins</string>
+    <string name="TriggerButton">Start Working</string>
 </resources>
