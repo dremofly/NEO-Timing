@@ -6,4 +6,10 @@
     <string name="Slogan">Manage your own time in NeoTiming...</string>
     <string name="showWorkTime">Work Time : 0 mins</string>
     <string name="TriggerButton">Start Working</string>
+    <string name="Time">0</string>
+    <string name="CancelButton">Cancel</string>
+    <string name="Title">Instruction</string>
+    <string name="Content">Congragulations!</string>
+    <string name="button_backtoWorkPage">Homepage</string>
+    <string name="button_backToItemPage">My NFTs</string>
 </resources>
