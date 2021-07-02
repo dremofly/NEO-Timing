@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class activity_timePicker extends AppCompatActivity {
 
     private int workTime;
+    private Button nftButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,15 @@ public class activity_timePicker extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(activity_timePicker.this,activity_workPage.class);
                 intent.putExtra("Time",workTime);
+                startActivity(intent);
+            }
+        });
+
+        nftButton = findViewById(R.id.NFT_button);
+        nftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity_timePicker.this,activity_ItemPage.class);
                 startActivity(intent);
             }
         });

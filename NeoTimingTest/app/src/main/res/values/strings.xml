@@ -12,4 +12,8 @@
     <string name="Content">Congragulations!</string>
     <string name="button_backtoWorkPage">Homepage</string>
     <string name="button_backToItemPage">My NFTs</string>
+    <string name="nftButton">My NFTs</string>
+    <string name="PointTextview">Total Points: 0</string>
+    <string name="total_points_x">Total Points: x</string>
+    <string name="exchange">Exchange</string>
 </resources>
