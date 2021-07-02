@@ -13,7 +13,7 @@
         android:max="180"
         android:min="0"
         android:splitTrack="false"
-        android:thumb="@mipmap/neo_logo"
+        android:thumb="@mipmap/seekbaricon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
