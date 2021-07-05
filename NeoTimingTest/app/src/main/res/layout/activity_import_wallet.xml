@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:text="KybmnDXHZaixQUnrwKBu4LZrEfRrYkGt5cKJpBSTkRjJ8Dqxw7PD"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.817"

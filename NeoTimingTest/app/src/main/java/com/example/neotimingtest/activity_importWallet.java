@@ -12,7 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.neotimingtest.sdk.Application;
+
 import org.w3c.dom.Text;
+
+import io.neow3j.protocol.Neow3j;
+import io.neow3j.wallet.Account;
+import io.neow3j.wallet.Wallet;
 
 public class activity_importWallet extends AppCompatActivity {
 
@@ -22,6 +28,16 @@ public class activity_importWallet extends AppCompatActivity {
 //    public static final String K_TITLE = "k_titile";
 //    public static final String K_SUB_TITLE =  "k_sub_title";
     private static final String TAG = "IMPORT WALLET";
+
+    private EditText wifText;
+
+    private String wif;
+
+    private Neow3j neow3j;
+
+    private Wallet wallet;
+
+    private Account account;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,11 +50,29 @@ public class activity_importWallet extends AppCompatActivity {
             public void onClick(View v) {
                 //Intent intent = new Intent(activity_createWallet.this, activity_createWallet.class);
                 //startActivity(intent);
-                EditText wifText = findViewById(R.id.wiftext);
-                Log.v(TAG, "input private key wif: " + wifText.getText().toString());
-                Toast.makeText(activity_importWallet.this, wifText.getText().toString(), Toast.LENGTH_SHORT).show();
+                wifText = findViewById(R.id.wiftext);
+                wif = wifText.getText().toString();
+                Log.v(TAG, "input private key wif: " + wif);
+                Toast.makeText(activity_importWallet.this, wif, Toast.LENGTH_SHORT).show();
+                Application.startConnection();
+                Application.importWallet(wif);
+                Application.getAccount();
+
+                Intent intent = new Intent(activity_importWallet.this,activity_timePicker.class);
+                startActivity(intent);
+//                try {
+//                    Log.i("Tag", "Result: ============="+ String.valueOf(Application.pointsOf(Application.account.getScriptHash())));
+//
+//                } catch (Throwable throwable) {
+//                    throwable.printStackTrace();
+//                }
             }
         });
+    }
+
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
 //    private  void gotInput(){

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-//        neow3j = Neow3j.build(new HttpService("http://127.0.0.1:50012"));
+//
 
         Button creatWalletButton = findViewById(R.id.create_wallet_button);
         creatWalletButton.setOnClickListener(new View.OnClickListener() {
@@ -40,21 +40,6 @@ public class MainActivity extends AppCompatActivity {
         importWalletButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Application.startConnection();
-                Application.importWallet(Application.privateKeyWif,"Neo");
-                try {
-                    Log.i("Tag", "Result: ============="+ String.valueOf(Application.pointsOf(Application.account.getScriptHash())));
-
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
-//                Application.neow3j.catchUpToLatestAndSubscribeToNewBlocksObservable(new BigInteger("100"), true)
-//                        .subscribe((blockReqResult) -> {
-//                            Log.i("TAG", "onClick: "+"blockIndex: " + blockReqResult.getBlock().getIndex());
-//                            Log.i("TAG","hashId: " + blockReqResult.getBlock().getHash());
-//                            Log.i("TAG","confirmations: " + blockReqResult.getBlock().getConfirmations());
-//                            Log.i("TAG","transactions: " + blockReqResult.getBlock().getTransactions());
-//                        });
 
                 Intent intent = new Intent(MainActivity.this, activity_importWallet.class);
                 startActivity(intent);

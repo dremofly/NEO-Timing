@@ -3,6 +3,7 @@ package com.example.neotimingtest.sdk;
 import io.neow3j.contract.*;
 import io.neow3j.contract.SmartContract;
 import io.neow3j.protocol.Neow3j;
+import io.neow3j.protocol.core.Neo;
 import io.neow3j.protocol.core.response.NeoInvokeFunction;
 import io.neow3j.protocol.core.response.NeoSendRawTransaction;
 import io.neow3j.protocol.core.stackitem.ByteStringStackItem;
@@ -24,11 +25,11 @@ import java.util.*;
 public class Application {
 
 
-    public static Account account;
+    private static Account account;
     //每次重新部署合约都需要一个新的合约地址
-    private static final String contractAddress = "0x86c95ef4cd0f17a3cf3afbe68e10e44ce954356b";
+    private static final String contractAddress = "0x1a9ba24466ac1f409678dc4e52376ada44feec99";
 
-    public static Neow3j neow3j;
+    private static Neow3j neow3j;
 
     private static Wallet wallet;
 
@@ -47,10 +48,9 @@ public class Application {
         "KyoTnS2SNPWK2ZSVfWBcgRvfzhYXAM31zqjULZVAC1yGsFvh2iyQ",
         "KxS4jkVd89S1QFrVjVdBQxoDZtjdyacmVG3ESSRpkWRsDPyJCRQW"};
 
-    public static void importWallet(String wif, String label) {
-        account = Account.fromWIF(wif)
-                .label(label);
-        wallet = Wallet.withAccounts(account).name("zilie").version("1.0");
+    public static void importWallet(String wif) {
+        account = Account.fromWIF(wif);
+        wallet = Wallet.withAccounts(account);
 
     }
 //    public static boolean importWallet(String address){
@@ -88,7 +88,8 @@ public class Application {
 
     public static void trigger(int time) throws Throwable {
         //从安卓时间控件获取参数time
-        time = time * 6;
+        // TOFIX
+        time = time *60;
         String function = "trigger";
         ContractParameter timeParam = ContractParameter.integer(time);
         checkConnection();
@@ -102,6 +103,7 @@ public class Application {
 
     public static void startConnection() {
         neow3j = Neow3j.build(new HttpService("http://192.168.1.47:20332"));
+
 
     }
 
@@ -328,11 +330,23 @@ public class Application {
                 .getScript().toString());
     }
 
+    public Neow3j getNeow3j(){
+        return neow3j;
+    }
+
+    public Wallet getWallet(){
+        return  wallet;
+    }
+
+    public static Account getAccount(){
+        return account;
+    }
+
 
 
     public static void main(String[] args) throws Throwable {
         startConnection();
-        importWallet(privateKeyWif, "Neo");
+        importWallet(privateKeyWif);
 
         int num = 9;
 
