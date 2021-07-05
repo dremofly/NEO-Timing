@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.neotimingtest">
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NeoTimingTest">
+
         <activity android:name=".activity_ExchangePage"></activity>
         <activity android:name=".activity_instructionPage" />
         <activity android:name=".activity_ItemPage" />
@@ -17,6 +21,7 @@
         <activity android:name=".activity_createWallet" />
         <activity android:name=".activity_importWallet" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

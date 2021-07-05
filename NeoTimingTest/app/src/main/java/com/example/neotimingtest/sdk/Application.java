@@ -24,17 +24,17 @@ import java.util.*;
 public class Application {
 
 
-    private static Account account;
+    public static Account account;
     //每次重新部署合约都需要一个新的合约地址
-    private static final String contractAddress = "0xcb36603da2846cf1bd4636971909056fe11023e1";
+    private static final String contractAddress = "0x86c95ef4cd0f17a3cf3afbe68e10e44ce954356b";
 
-    private static Neow3j neow3j;
+    public static Neow3j neow3j;
 
     private static Wallet wallet;
 
     private static final Hash160 scriptHash = new Hash160(contractAddress);
 
-    private static final String privateKeyWif = "KybmnDXHZaixQUnrwKBu4LZrEfRrYkGt5cKJpBSTkRjJ8Dqxw7PD";
+    public static final String privateKeyWif = "KybmnDXHZaixQUnrwKBu4LZrEfRrYkGt5cKJpBSTkRjJ8Dqxw7PD";
     //每次重新部署合约后，需要给该地址转gas为了执行合约
     private static final String publickeyAddress = "NicfNxmzhd5f36z7N5Nap3HaT8Z5WB7WKq";
 
@@ -50,7 +50,7 @@ public class Application {
     public static void importWallet(String wif, String label) {
         account = Account.fromWIF(wif)
                 .label(label);
-        wallet = Wallet.withAccounts(account).name("elise").version("1.0");
+        wallet = Wallet.withAccounts(account).name("zilie").version("1.0");
 
     }
 //    public static boolean importWallet(String address){
@@ -101,7 +101,8 @@ public class Application {
     }
 
     public static void startConnection() {
-        neow3j = Neow3j.build(new HttpService("http://127.0.0.1:50012"));
+        neow3j = Neow3j.build(new HttpService("http://192.168.1.47:20332"));
+
     }
 
     private static void checkConnection() throws Exception {
@@ -203,7 +204,7 @@ public class Application {
                 .send();
     }
 
-    private static void setPoint(int point) throws Throwable {
+    public static void setPoint(int point) throws Throwable {
         String function = "setPoint";
         ContractParameter pointParam = ContractParameter.integer(point);
         checkConnection();
