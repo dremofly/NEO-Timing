@@ -7,7 +7,6 @@ using Neo.SmartContract.Framework.Services;
 using System;
 using System.ComponentModel;
 using System.Numerics;
-using System.Collections;
 namespace Neo.SmartContract
 {
     [ManifestExtra("Author", "Hong_Zilie")]
@@ -18,7 +17,9 @@ namespace Neo.SmartContract
     public sealed class NameService : Framework.SmartContract
     {
         public delegate void OnTransferDelegate(UInt160 from, UInt160 to, BigInteger amount, ByteString tokenId);
-        public delegate void TestDemo(UInt160 owner, UInt160 sender);
+        public delegate void TestDemo(int breakpoint, string res, BigInteger b);
+
+        // public delegate void RandomeGenreDelegate();
 
         [DisplayName("Transfer")]
         public static event OnTransferDelegate OnTransfer;
@@ -26,10 +27,12 @@ namespace Neo.SmartContract
         [DisplayName("TestEvent")]
         public static event TestDemo test;
 
+        // [DisplayName("TestRandom")]
+        // public static event RandomeGenreDelegate OnRandom;
         private const byte Prefix_TotalSupply = 0x00;
         private const byte Prefix_Balance = 0x01;
         private const byte Prefix_AccountToken = 0x02;
-        private const byte Prefix_RegisterPrice = 0x10;
+        // private const byte Prefix_RegisterPrice = 0x10;
 
         private const byte Prefix_UserInfo = 0x22;
         // private const byte Prefix_Root = 0x20;
@@ -38,9 +41,9 @@ namespace Neo.SmartContract
         private const byte Prefix_UserPoint= 0x20;
         
         // private const byte Prefix_Record = 0x22;
-        private static Transaction Tx => (Transaction) Runtime.ScriptContainer;
+        // private static Transaction Tx => (Transaction) Runtime.ScriptContainer;
         // private const int NameMaxLength = 255;
-        private const ulong OneYear = 365ul * 24 * 3600 * 1000;
+        private const ulong OneMonth =  24 * 3600 * 1000;
 
         [Safe]
         public static string Symbol() => "NNS";
@@ -52,12 +55,6 @@ namespace Neo.SmartContract
         public static BigInteger TotalSupply() => (BigInteger)Storage.Get(Storage.CurrentContext, new byte[] { Prefix_TotalSupply });
 
 
-        [Safe]
-        public static void Test(UInt160 owner) {
-
-            Transaction tx = (Transaction)Runtime.ScriptContainer; // 提取tx的参数
-            test(owner, tx.Sender);
-        }
 
         [Safe]
         public static UInt160 OwnerOf(ByteString tokenId)
@@ -77,6 +74,12 @@ namespace Neo.SmartContract
             Map<string, object> map = new();
             map["name"] = token.Name;
             map["expiration"] = token.Expiration;
+            map["owner"] = token.Owner;
+            map["isOnsale"] = token.IsOnSale;
+            map["Genre"] = token.Genre;
+            map["Hp"] = token.Hp;
+            map["Attack"] = token.Attack;
+            map["Defense"] = token.Defense;
             return map;
         }
 
@@ -109,7 +112,7 @@ namespace Neo.SmartContract
         public static Object[] ShowMyItems(UInt160 owner)
         {
             var iterator = TokensOf(owner);
-            Object[] MyItemsArray = new object[100];
+            Object[] MyItemsArray = new object[10];
             while (iterator.Next())
                 {
                     var tokenId = iterator.Value;
@@ -117,21 +120,19 @@ namespace Neo.SmartContract
                 }
             return MyItemsArray;
         }
-        public static Object[] showOnSaleItems()
+        public static Object[] showItems()
         {
             var iterator = Tokens();
-            Object[] OnSaleItemsArray = new object[100];
+            Object[] ItemsArray = new object[10];
             while (iterator.Next()){
-                NameState token = (NameState)iterator.Value;
-                if(token.IsOnSale == true){
-                    Append(OnSaleItemsArray,token);
-                }
+                
+                var tokenId = iterator.Value;
+                Append(ItemsArray,tokenId);
             }
-            return OnSaleItemsArray;
+            return ItemsArray;
         }
 
-        [Safe]
-        public static bool TransferItem(UInt160 to, ByteString tokenId, object data)
+        public static bool TransferItem(UInt160 to, ByteString tokenId)
         {
             if (to is null || !to.IsValid)
                 throw new Exception("The argument \"to\" is invalid.");
@@ -143,7 +144,7 @@ namespace Neo.SmartContract
             NameState token = (NameState)StdLib.Deserialize(nameMap[tokenKey]);
             token.EnsureNotExpired();
             UInt160 from = token.Owner;
-            if (!Runtime.CheckWitness(from)) return false;
+            // if (!Runtime.CheckWitness(from)) return false;
             if (from != to)
             {
                 //Update token info
@@ -165,7 +166,7 @@ namespace Neo.SmartContract
                 balanceMap.Put(to, balance);
                 accountMap[to + tokenKey] = tokenId;
             }
-            PostTransfer(from, to, tokenId, data);
+            // PostTransfer(from, to, tokenId);
             return true;
         }
 
@@ -209,18 +210,18 @@ namespace Neo.SmartContract
 
        
 
-        public static void SetPrice(long price)
-        {
-            CheckCommittee();
-            if (price <= 0 || price > 10000_00000000) throw new Exception("The price is out of range.");
-            Storage.Put(Storage.CurrentContext, new byte[] { Prefix_RegisterPrice }, price);
-        }
+        // public static void SetPrice(long price)
+        // {
+        //     CheckCommittee();
+        //     if (price <= 0 || price > 10000_00000000) throw new Exception("The price is out of range.");
+        //     Storage.Put(Storage.CurrentContext, new byte[] { Prefix_RegisterPrice }, price);
+        // }
 
-        [Safe]
-        public static long GetPrice()
-        {
-            return (long)(BigInteger)Storage.Get(Storage.CurrentContext, new byte[] { Prefix_RegisterPrice });
-        }
+        // [Safe]
+        // public static long GetPrice()
+        // {
+        //     return (long)(BigInteger)Storage.Get(Storage.CurrentContext, new byte[] { Prefix_RegisterPrice });
+        // }
 
        
 
@@ -231,12 +232,15 @@ namespace Neo.SmartContract
             StorageMap accountMap = new(context, Prefix_AccountToken);
             StorageMap nameMap = new(context, Prefix_Name);
             if (!Runtime.CheckWitness(owner)) throw new InvalidOperationException("No authorization.");
-            Runtime.BurnGas(GetPrice());
+            // test(Tx.Sender, owner, GetPrice());
+            // Runtime.BurnGas(GetPrice());
+            
             ByteString tokenKey = GetKey(name);
             NameState token;
             UInt160 oldOwner = null;
             if (nameMap[tokenKey] is not null)
             {
+                
                 token = (NameState)StdLib.Deserialize(nameMap[tokenKey]);
                 if (Runtime.Time < token.Expiration) return false;
                 oldOwner = token.Owner;
@@ -250,6 +254,7 @@ namespace Neo.SmartContract
             }
             else
             {
+                
                 byte[] key = new byte[] { Prefix_TotalSupply };
                 BigInteger totalSupply = (BigInteger)Storage.Get(context, key);
                 Storage.Put(context, key, totalSupply + 1);
@@ -259,24 +264,65 @@ namespace Neo.SmartContract
                 Owner = owner,
                 Name = name,
                 IsOnSale = false,
-                Expiration = Runtime.Time + OneYear
+                Expiration = Runtime.Time + OneMonth,
+                Genre = RandomGenre(name),
+                Hp =  RandomHp(name),
+                Attack = RandomAttack(name),
+                Defense = RandomDefense(name)
+        
             };
+            
             nameMap[tokenKey] = StdLib.Serialize(token);
             BigInteger ownerBalance = (BigInteger)balanceMap[owner];
             ownerBalance++;
             balanceMap.Put(owner, ownerBalance);
             accountMap[owner + tokenKey] = name;
-            PostTransfer(oldOwner, owner, name, null);
+            
+            // PostTransfer(oldOwner, owner, name);
             return true;
         }
 
         [DisplayName("_deploy")]
-        public static void OnDeployment(object data, bool update)
+        public static void OnDeployment(bool update)
         {
             if (update) return;
             StorageContext context = Storage.CurrentContext;
             Storage.Put(context, new byte[] { Prefix_TotalSupply }, 0);
-            Storage.Put(context, new byte[] { Prefix_RegisterPrice }, 10_00000000);
+            // Storage.Put(context, new byte[] { Prefix_RegisterPrice }, 10_00000000);
+        }
+
+        public static uint Random(String name) {
+                Transaction tx = (Transaction) Runtime.ScriptContainer;
+                test(0, "hello", 0);
+                ByteString res = CryptoLib.Sha256(name + tx.Nonce.ToString());
+                test(1, res, 1);
+                BigInteger temp = (BigInteger) res;
+                if (temp < 0 ) {
+                    temp = - temp;
+                }
+                test(2, res, temp);
+                return (uint)(temp % 100);
+                
+                // return  (uint)(Runtime.Time + tx.Nonce);
+        }
+
+        public static string RandomGenre(String name){
+            String[] genres = {"hat","cloth","pants","shoses","pet"};
+            long index  = (long)(Random(name) % (genres.Length));
+            return genres[index];
+        }
+
+        public static uint RandomHp(String name){
+            uint value  = (uint)Random(name) % 60;
+            return value;
+        }
+        public static uint RandomAttack(String name){
+            uint value  = (uint)Random(name) % 20;
+            return value;
+        }
+        public static uint RandomDefense(String name){
+            uint value  = (uint)Random(name) % 10;
+            return value;
         }
 
         private static void CheckCommittee()
@@ -294,34 +340,46 @@ namespace Neo.SmartContract
 
         
 
-        private static void PostTransfer(UInt160 from, UInt160 to, ByteString tokenId, object data)
+        private static void PostTransfer(UInt160 from, UInt160 to, ByteString tokenId)
         {
             OnTransfer(from, to, 1, tokenId);
             if (to is not null && ContractManagement.GetContract(to) is not null)
-                Contract.Call(to, "onNEP11Payment", CallFlags.All, from, 1, tokenId, data);
+                Contract.Call(to, "onNEP11Payment", CallFlags.All, from, 1, tokenId);
         }
 
         public static void Trigger(long time) {
-
-            if(time <= 0 || time > 1000){
-                throw new Exception("out of limited time.");
-            }
-            StorageMap UserMap = new StorageMap(Storage.CurrentContext,Prefix_UserInfo);
-            //构造用户实例，传入参数{计时开始时间，结束时间初始值0，历史计时ArrayList,积分初始值0，当前没有计时任务false}
-            Users user = new()
-            {
-                StartTimeStamp = Runtime.Time,
-                EndTimeStamp = 0,
-                Interval = time,
-                History = new Object[100],
-                Point = 0,
-                State =  true
-            };
-
-            Transaction tx = (Transaction)Runtime.ScriptContainer; // 提取tx的参数
             
-            UserMap[tx.Sender] = StdLib.Serialize(user);
+            StorageMap UserMap = new StorageMap(Storage.CurrentContext,Prefix_UserInfo);
+            Transaction tx = (Transaction)Runtime.ScriptContainer; // 提取tx的参数
+            if (UserMap[tx.Sender] is not null) {
+                Users user = (Users)StdLib.Deserialize(UserMap[tx.Sender]);
+                if(user.State == true) {
+                    throw new Exception("A task has not finished or been canceled");
+                }
+
+                if(time <= 0 || time > 1000){
+                    throw new Exception("out of limited time.");
+                }
+            
+                //构造用户实例，传入参数{计时开始时间，结束时间初始值0，历史计时ArrayList,积分初始值0，当前没有计时任务false}
+                user.StartTimeStamp = Runtime.Time;
+                user.EndTimeStamp = 0;
+                user.Interval = time;
+                user.State =  true;
+                UserMap[tx.Sender] = StdLib.Serialize(user);
     
+            } else {
+                Users user = new(){
+                    StartTimeStamp = Runtime.Time,
+                    EndTimeStamp = 0,
+                    Interval = time,
+                    State = true
+
+                };
+                UserMap[tx.Sender] = StdLib.Serialize(user);
+            }
+            
+
         }
         [OpCode(OpCode.APPEND)]
         private static extern void Append<T>(T[] array, T newItem);
@@ -360,19 +418,25 @@ namespace Neo.SmartContract
                 throw new Exception("The argument \"owner\" is invalid.");
             StorageMap PointMap = new StorageMap(Storage.CurrentContext,Prefix_UserPoint);
             Transaction tx = (Transaction)Runtime.ScriptContainer; // 提取tx的参数
-            test(owner, tx.Sender);
-            return (BigInteger)PointMap.Get(owner);
+            if(PointMap.Get(owner) != null){
+                return (BigInteger)PointMap.Get(owner);
+            }
+            else {
+                return (BigInteger) 0;
+            }
+            
         }
 
-        public static void Cancel(){
+        public static bool Cancel(){
             StorageMap UserMap = new StorageMap(Storage.CurrentContext,Prefix_UserInfo);
             Transaction tx = (Transaction)Runtime.ScriptContainer; // 提取tx的参数
             Users user = (Users)StdLib.Deserialize(UserMap[tx.Sender]);
             if (user.State == false) {
-                throw new Exception("The time management has already finished");
+                throw new Exception("The time management has already finished ");
             }
             user.State = false;
             UserMap[tx.Sender] = StdLib.Serialize(user);
+            return user.State;
         }
 
         public static void WithDraw(int exchange,string name) {
@@ -390,6 +454,12 @@ namespace Neo.SmartContract
             PointMap.Put(tx.Sender,(BigInteger)point);
             Register(name,tx.Sender);
         }  
+        //Easier to get more points 
+        public static void setPoint(int point) {
+            Transaction tx = (Transaction)Runtime.ScriptContainer; // 提取tx的参数
+             StorageMap PointMap = new StorageMap(Storage.CurrentContext,Prefix_UserPoint);
+             PointMap.Put(tx.Sender,point);
+        }
     }
 
     // private static byte[] GetRecordKey(ByteString tokenKey, string name, RecordType type)

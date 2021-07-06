@@ -6,10 +6,10 @@ namespace Neo.SmartContract{
 
             public ulong StartTimeStamp;
             public  ulong EndTimeStamp ;
-            public  long Interval;
+            public  long Interval = 0;
             public object[] History;
-            public ulong Point;
-            public bool State;
+            public ulong Point = 0;
+            public bool State = false;
 
         public Users(){}
         public Users(ulong startTimeStamp, ulong endTimeStamp, long interval, object[] history, ulong point, bool isEnd) {

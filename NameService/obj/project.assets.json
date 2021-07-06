@@ -197,11 +197,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/qinzilie/NameService/NameService.csproj",
+      "projectUniqueName": "/Users/qinzilie/NameService gitversion/NEOTiming/NameService/NameService.csproj",
       "projectName": "NameService",
-      "projectPath": "/Users/qinzilie/NameService/NameService.csproj",
+      "projectPath": "/Users/qinzilie/NameService gitversion/NEOTiming/NameService/NameService.csproj",
       "packagesPath": "/Users/qinzilie/.nuget/packages/",
-      "outputPath": "/Users/qinzilie/NameService/obj/",
+      "outputPath": "/Users/qinzilie/NameService gitversion/NEOTiming/NameService/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/qinzilie/.nuget/NuGet/NuGet.Config"

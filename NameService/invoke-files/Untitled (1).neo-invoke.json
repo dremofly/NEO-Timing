@@ -1,9 +1,0 @@
-[
-  {
-    "contract": "NameService",
-    "operation": "balanceOf",
-    "args": [
-      "@NfE9FX5jkE7gU64ySRxNij6ZJNNPsy3csb"
-    ]
-  }
-]

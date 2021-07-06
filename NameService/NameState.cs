@@ -10,6 +10,14 @@ namespace Neo.SmartContract
         public ulong Expiration;
         public bool IsOnSale; 
 
+        public string Genre;
+
+        public uint Hp;
+
+        public uint Attack;
+
+        public uint Defense;
+
 
         public void EnsureNotExpired()
         {

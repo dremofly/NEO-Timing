@@ -1,0 +1,121 @@
+[
+  {
+    "contract": "NameService",
+    "operation": "setPoint",
+    "args": [
+      300
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "balanceOf",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "pointsOf",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "withDraw",
+    "args": [
+      2,
+      "dress"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "balanceOf",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "pointsOf",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "withDraw",
+    "args": [
+      9,
+      "mask"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "balanceOf",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "pointsOf",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "properties",
+    "args": [
+      "mask"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "properties",
+    "args": [
+      "socks"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "transferItem",
+    "args": [
+      "@NicfNxmzhd5f36z7N5Nap3HaT8Z5WB7WKq",
+      "dress"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "balanceOf",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "balanceOf",
+    "args": [
+      "@NicfNxmzhd5f36z7N5Nap3HaT8Z5WB7WKq"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "ownerOf",
+    "args": [
+      "dress"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "showMyItems",
+    "args": [
+      "@AlliceWallet"
+    ]
+  },
+  {
+    "contract": "NameService",
+    "operation": "showMyItems"
+  }
+]
