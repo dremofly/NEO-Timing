@@ -16,4 +16,5 @@
     <string name="PointTextview">Total Points: 0</string>
     <string name="total_points_x">Total Points: x</string>
     <string name="exchange">Exchange</string>
+    <string name="exchang_page_total_points_0">Total Points: 0</string>
 </resources>

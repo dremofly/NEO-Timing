@@ -2,9 +2,10 @@ package com.example.neotimingtest.sdk;
 
 import io.neow3j.types.Hash160;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
-public class Token {
+public class Token implements Serializable{
 
     private Hash160 owner;
 
@@ -60,6 +61,7 @@ public class Token {
     public void setOnSale(boolean onSale) {
         isOnSale = onSale;
     }
+
 
     public Hash160 getOwner() {
         return owner;

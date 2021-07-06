@@ -57,6 +57,11 @@ public class activity_importWallet extends AppCompatActivity {
                 Application.startConnection();
                 Application.importWallet(wif);
                 Application.getAccount();
+//                try {
+//                    Application.setPoint(2000);
+//                } catch (Throwable throwable) {
+//                    throwable.printStackTrace();
+//                }
 
                 Intent intent = new Intent(activity_importWallet.this,activity_timePicker.class);
                 startActivity(intent);

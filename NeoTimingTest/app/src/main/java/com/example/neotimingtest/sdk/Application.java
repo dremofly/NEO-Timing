@@ -242,7 +242,7 @@ public class Application {
     public static Token tokenProperties(String name) throws Exception {
         String function = "properties";
         checkConnection();
-        ContractParameter tokenParam = ContractParameter.byteArrayFromString(name);
+        ContractParameter tokenParam = ContractParameter.string(name);
         List<ContractParameter> params = Arrays.asList(tokenParam);
         NeoInvokeFunction response = new SmartContract(scriptHash, neow3j)
                 .callInvokeFunction(function, params, Signer.calledByEntry(account.getScriptHash()));
