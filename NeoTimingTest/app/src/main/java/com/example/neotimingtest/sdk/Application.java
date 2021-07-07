@@ -27,7 +27,7 @@ public class Application {
 
     private static Account account;
     //每次重新部署合约都需要一个新的合约地址
-    private static final String contractAddress = "0x1a9ba24466ac1f409678dc4e52376ada44feec99";
+    private static final String contractAddress = "0x208d3b6c6f241cd013cc8df51cd0d156966ebbd6";
 
     private static Neow3j neow3j;
 
@@ -39,7 +39,7 @@ public class Application {
     //每次重新部署合约后，需要给该地址转gas为了执行合约
     private static final String publickeyAddress = "NicfNxmzhd5f36z7N5Nap3HaT8Z5WB7WKq";
 
-    private static final Account[] otherAccounts = new Account[5];
+    private static String[] accountInfo;
 
     private static final String[] accountsWIF = {
             "L5YKUrTdJoF8gEpwqEtgTuggmajytG5hQwc4W1HHQuhon2thHvca",
@@ -59,32 +59,30 @@ public class Application {
 //        return true;
 //    }
 
-    public static void createWallet() throws Throwable {
+    public static String createAccount() throws Throwable {
 
-        for(int i=0; i<5; i++){
-            otherAccounts[i] = Account.create();
-            System.out.println(otherAccounts[i].getECKeyPair().exportAsWIF());
-            System.out.println(otherAccounts[i].getECKeyPair().getAddress());
-            System.out.println(otherAccounts[i].getEncryptedPrivateKey());
-            System.out.println(otherAccounts[i].getECKeyPair().getPublicKey());
 
-            BigInteger amount = BigInteger.valueOf(100);
-            NeoSendRawTransaction response = new GasToken(neow3j)
-                    .transferFromDefaultAccount(wallet, Hash160.fromAddress(otherAccounts[i].getAddress()),amount )
-                    .signers(Signer.calledByEntry(account.getScriptHash()))
-                    .wallet(wallet)
-                    .additionalNetworkFee(1L)
-                    .sign()
-                    .send();
+            Account account2 = Account.create();
+            String wif = account2.getECKeyPair().exportAsWIF();
+        System.out.println(account2.getECKeyPair().getPublicKey());
+        System.out.println(account2.getECKeyPair().getAddress());
+        System.out.println(account2.getECKeyPair().exportAsWIF());
 
-            BigInteger res = new GasToken(neow3j).getBalanceOf(otherAccounts[i]);
-            System.out.println("balance of " + otherAccounts[i].getAddress() + "is " + res);
-            System.out.println("Public key == " +otherAccounts[i].getECKeyPair().getPublicKey());
+        BigInteger amount = BigInteger.valueOf(1000);
+//            NeoSendRawTransaction response = new GasToken(neow3j)
+//                    .transferFromDefaultAccount(wallet, Hash160.fromAddress(account2.getAddress()),amount )
+//                    .signers(Signer.calledByEntry(account.getScriptHash()))
+//                    .wallet(wallet)
+//                    .additionalNetworkFee(1L)
+//                    .sign()
+//                    .send();
+
+            BigInteger res = new GasToken(neow3j).getBalanceOf(account2);
+            System.out.println(res);
+            return wif;
         }
 
         // 转账
-
-    }
 
     public static void trigger(int time) throws Throwable {
         //从安卓时间控件获取参数time

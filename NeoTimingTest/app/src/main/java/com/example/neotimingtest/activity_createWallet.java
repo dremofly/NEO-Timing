@@ -11,12 +11,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class activity_createWallet extends AppCompatActivity {
+import com.example.neotimingtest.sdk.Application;
 
+public class activity_createWallet extends AppCompatActivity {
+    TextView view;
+
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_wallet);
+        Intent intent = getIntent();
+        String wif1 = intent.getStringExtra("WIF");
+        view = findViewById(R.id.textView31);
+        view.setText(wif1);
+        button = findViewById(R.id.button7);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Application.importWallet(wif1);
+                Intent intent1 = new Intent(activity_createWallet.this,activity_timePicker.class);
+                startActivity(intent1);
+            }
+        });
 
     }
 }

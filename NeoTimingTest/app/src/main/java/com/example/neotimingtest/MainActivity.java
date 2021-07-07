@@ -18,6 +18,7 @@ import java.math.BigInteger;
 public class MainActivity extends AppCompatActivity {
 
     static final int REQ_CODE = 10;
+    private String wif;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,14 @@ public class MainActivity extends AppCompatActivity {
         creatWalletButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, activity_timePicker.class);
+                try {
+                    Application.startConnection();
+                    wif = Application.createAccount();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+                Intent intent = new Intent(MainActivity.this, activity_createWallet.class);
+                intent.putExtra("WIF",wif);
                 startActivity(intent);
             }
         });

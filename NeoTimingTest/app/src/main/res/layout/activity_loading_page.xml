@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
+        android:layout_width="236dp"
+        android:layout_height="26dp"
         android:text="IsOnSale==="
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,14 +20,15 @@
 
     <TextView
         android:id="@+id/textViewInstruction"
-        android:layout_width="124dp"
-        android:layout_height="61dp"
+        android:layout_width="200dp"
+        android:layout_height="72dp"
         android:text="We are now trying to create an equipment for your pet. Please wait for a moment.  "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintVertical_bias="0.011" />
 
     <TextView
         android:id="@+id/textViewTime"
@@ -36,10 +37,10 @@
         android:text="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <Button
         android:id="@+id/buttonOpen"
@@ -55,8 +56,8 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
+        android:layout_width="239dp"
+        android:layout_height="22dp"
         android:text="Owner==="
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,8 +68,8 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
+        android:layout_width="239dp"
+        android:layout_height="28dp"
         android:text="Expriation==="
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +80,7 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="76dp"
+        android:layout_width="233dp"
         android:layout_height="25dp"
         android:text="Defense==="
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,8 +92,8 @@
 
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
+        android:layout_width="232dp"
+        android:layout_height="26dp"
         android:text="Attack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,8 +104,8 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
+        android:layout_width="234dp"
+        android:layout_height="24dp"
         android:text="Hp==="
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,8 +115,8 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
+        android:layout_width="238dp"
+        android:layout_height="26dp"
         android:text="Genre==="
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,8 +127,8 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="76dp"
-        android:layout_height="25dp"
+        android:layout_width="235dp"
+        android:layout_height="30dp"
         android:text="Name==="
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

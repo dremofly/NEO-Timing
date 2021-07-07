@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NeoTimingTest"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity_propertyPage"></activity>
+        <activity android:name=".activity_afterSale"></activity>
+        <activity android:name=".activity_propertyPage1" />
         <activity android:name=".activity_loadingPage" />
         <activity android:name=".activity_ExchangePage" />
         <activity android:name=".activity_instructionPage" />
