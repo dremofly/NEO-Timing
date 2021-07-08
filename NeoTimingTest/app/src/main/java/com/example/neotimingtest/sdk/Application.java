@@ -27,7 +27,9 @@ public class Application {
 
     private static Account account;
     //每次重新部署合约都需要一个新的合约地址
-    private static final String contractAddress = "0x208d3b6c6f241cd013cc8df51cd0d156966ebbd6";
+    //0x88d7efe029d9741690e3f91a2745062a636b21ec NameService合约地址
+    //0xcf821812cba65f7219654ab9e1a29ed208ef8bb9 改完withdraw和 register之后的合约地址
+    private static final String contractAddress = "0x32f78d5f43379c519fb9d6970c69c56b9713d809";
 
     private static Neow3j neow3j;
 
@@ -53,11 +55,6 @@ public class Application {
         wallet = Wallet.withAccounts(account);
 
     }
-//    public static boolean importWallet(String address){
-//        account = Account.fromAddress(address);
-//        wallet = wallet.withAccounts(account);
-//        return true;
-//    }
 
     public static String createAccount() throws Throwable {
 
@@ -85,8 +82,6 @@ public class Application {
         // 转账
 
     public static void trigger(int time) throws Throwable {
-        //从安卓时间控件获取参数time
-        // TOFIX
         time = time *60;
         String function = "trigger";
         ContractParameter timeParam = ContractParameter.integer(time);
@@ -127,12 +122,7 @@ public class Application {
         String function = "pointsOf";
         checkConnection();
         ContractParameter usrParam = ContractParameter.hash160(address);
-//        TransactionBuilder txBuilder = new SmartContract(scriptHash, neow3j)
-//                .invokeFunction(function,usrParam);
-//        NeoSendRawTransaction response = txBuilder.signers(Signer.calledByEntry(account.getScriptHash()))
-//                .wallet(wallet)
-//                .sign()
-//                .send();
+
         List<ContractParameter> params = Arrays.asList(usrParam);
         NeoInvokeFunction response = new SmartContract(scriptHash, neow3j)
                 .callInvokeFunction(function, params, Signer.calledByEntry(account.getScriptHash()));
@@ -161,7 +151,7 @@ public class Application {
         checkConnection();
         TransactionBuilder txBuilder = new SmartContract(scriptHash, neow3j)
                 .invokeFunction(function, exchangeParam,nameParam);
-        NeoSendRawTransaction response = txBuilder.signers(Signer.calledByEntry(account.getScriptHash()))
+        NeoSendRawTransaction response = txBuilder.signers(Signer.calledByEntry(account.getScriptHash())).additionalNetworkFee(10)
                 .wallet(wallet)
                 .sign()
                 .send();
@@ -253,36 +243,36 @@ public class Application {
 //            System.out.println(mapStack.getMap().get(key).getClass());
             if(key.getString().equals("name")) {
                 token.setName(mapStack.getMap().get(key).getString());
-                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getString());
+//                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getString());
             }
             if(key.getString().equals("expiration") ) {
                 token.setExpiration(mapStack.getMap().get(key).getInteger());
-                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
+//                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
             }
             if(key.getString().equals("owner")) {
                 ByteStringStackItem byteStringStackItem = (ByteStringStackItem) mapStack.getMap().get(key);
                 token.setOwner(Hash160.fromAddress(byteStringStackItem.getAddress()));
-                System.out.println(key.getString() +"---" +  Hash160.fromAddress(byteStringStackItem.getAddress()));
+//                System.out.println(key.getString() +"---" +  Hash160.fromAddress(byteStringStackItem.getAddress()));
             }
             if(key.getString().equals("isOnsale")){
                 token.setOnSale(mapStack.getMap().get(key).getBoolean());
-                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getBoolean());
+//                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getBoolean());
             }
             if(key.getString().equals("Genre")){
                 token.setGenre(mapStack.getMap().get(key).getString());
-                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getString());
+//                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getString());
             }
             if(key.getString().equals("Hp")){
                 token.setHp(mapStack.getMap().get(key).getInteger());
-                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
+//                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
             }
             if(key.getString().equals("Attack")){
                 token.setAttack(mapStack.getMap().get(key).getInteger());
-                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
+//                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
             }
             if(key.getString().equals("Defense")){
                 token.setDefense(mapStack.getMap().get(key).getInteger());
-                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
+//                System.out.println(key.getString() +"---" + mapStack.getMap().get(key).getInteger());
             }
 
         }
@@ -320,10 +310,10 @@ public class Application {
         checkConnection();
         TransactionBuilder txBuilder = new SmartContract(scriptHash, neow3j)
                 .invokeFunction(function, usrParam,nameParam);
-//        NeoSendRawTransaction response = txBuilder.signers(Signer.calledByEntry(account.getScriptHash()))
-//                .wallet(wallet)
-//                .sign()
-//                .send();
+        NeoSendRawTransaction response = txBuilder.signers(Signer.calledByEntry(account.getScriptHash()))
+                .wallet(wallet)
+                .sign()
+                .send();
         System.out.println(txBuilder.signers(Signer.calledByEntry(account.getScriptHash()))
                 .getScript().toString());
     }
@@ -425,77 +415,6 @@ public class Application {
                
         }
     }
-//        if(state == 1){
-////          createWallet();
-//            setPoint(2000);
-//
-//        } else if(state == 2){
-//            Thread.sleep(10000);
-//            pointsOf(account.getScriptHash());
-//            banlanceOf(account.getScriptHash());
-//            System.out.println(account.getNep17Balances(neow3j));
-//        } else if(state == 3) {
-//            withdraw(12,"pants");
-//            Thread.sleep(10000);
-//            pointsOf(account.getScriptHash());
-//            banlanceOf(account.getScriptHash());
-//            System.out.println(account.getNep17Balances(neow3j));
-//
-//
-//            withdraw(13,"hat");
-//            Thread.sleep(10000);
-//            pointsOf(account.getScriptHash());
-//            banlanceOf(account.getScriptHash());
-//            System.out.println(account.getNep17Balances(neow3j));
-//
-//            withdraw(15,"glove");
-//            Thread.sleep(10000);
-//            pointsOf(account.getScriptHash());
-//            banlanceOf(account.getScriptHash());
-//            System.out.println(account.getNep17Balances(neow3j));
-//
-//        } else if (state == 4) {
-//            //查看用户获得的NFT的名字以及数量
-//            showMyItems(account.getScriptHash());
-//            banlanceOf(account.getScriptHash());
-//        } else if (state == 5) {
-//            //查看生成的NFT属性
-//            tokenProperties("pants");
-//            tokenProperties("hat");
-//            tokenProperties("glove");
-//        } else if (state == 6) {
-//            onSale(account.getScriptHash(),"hat");
-//            onSale(account.getScriptHash(),"pants");
-//        } else if (state == 7) {
-//            tokenProperties("hat");
-//            tokenProperties("pants");
-//            tokenProperties("glove");
-//        } else if (state == 8) {
-//            showOnSaleItems();
-//        } else if (state == 9) {
-//            createWallet();
-//        } else if (state == 10) {
-//            System.out.println(Account.fromWIF(accountsWIF[0]).getScriptHash());
-//            System.out.println(account.getScriptHash());
-//            sellOnSaleItem(Account.fromWIF(accountsWIF[0]).getScriptHash(),"hat");
-//        } else if (state == 11) {
-//            sellOnSaleItem(Hash160.fromAddress("NdqhW7YhhMtgpjdFcqMTXggTP7JHjFFHdm"),"hat");
-//        }
-//    }
-//        withdraw(10,"glove");
-//        withdraw(10,"pants");
-//        withdraw(12,"shirt");
-//        withdraw(5,"shoes");
-//        Thread.sleep(20000);
-//        System.out.println("withDraw");
-//        pointsOf(account.getScriptHash());
-//        banlanceOf(account.getScriptHash());
-
-//        System.out.println(account.getNep17Balances(neow3j));
-//        trigger(1);
-//        Thread.sleep(10000);
-//        end();
-
 
 }
 

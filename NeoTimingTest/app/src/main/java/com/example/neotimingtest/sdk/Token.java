@@ -8,19 +8,12 @@ import java.math.BigInteger;
 public class Token implements Serializable{
 
     private Hash160 owner;
-
     private String name;
-
     private BigInteger expiration;
-
     private  boolean isOnSale;
-
     private String genre;
-
     private BigInteger hp;
-
     private BigInteger attack;
-
     private  BigInteger defense;
 
     public Token(Hash160 owner, String name, BigInteger expiration, boolean isOnSale,String genre,BigInteger hp,BigInteger attack, BigInteger defense) {

@@ -23,8 +23,9 @@ import java.util.ArrayList;
 import io.neow3j.types.Hash160;
 
 public class activity_ExchangePage extends AppCompatActivity {
-    Button button1000;
-    Button button2000;
+
+    private Button button1000;
+    private Button button2000;
     private AlertDialog alert;
     private TextView pointView;
     private String number;
@@ -32,51 +33,61 @@ public class activity_ExchangePage extends AppCompatActivity {
     private int[] textArray = {R.id.textView26, R.id.textView28, R.id.textView27, R.id.textView29};
     private int[] buttonArray = {R.id.button3,R.id.button4,R.id.button5,R.id.button6};
     private Token token;
-
     private Button homeButton;
+    private TextView view36;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exchange_page);
-        pointView = findViewById(R.id.exchangePagePointTextView);
+        view36 = findViewById(R.id.textView36);
+        view36.setText("Account Address:"+Application.getAccount().getECKeyPair().getAddress());
 
+        pointView = findViewById(R.id.exchangePagePointTextView);
         try {
             pointView.setText("Total Points:" + Application.pointsOf(Application.getAccount().getScriptHash()));
             showOnSaleItem();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
-        button1000 = findViewById(R.id.button1000);
 
+        button1000 = findViewById(R.id.button1000);
         button1000.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                try {
-//                   if(Application.pointsOf(Application.getAccount().getScriptHash()).intValue() < 1000){
-//                       Toast.makeText(activity_ExchangePage.this, "You don't have enough points.", Toast.LENGTH_SHORT).show();
-//                   }
-//                   else {
-//                       alert.show();
-//                   }
-//                } catch (Throwable throwable) {
-//                    throwable.printStackTrace();
-//                }
+                try {
+                    if(Application.pointsOf(Application.getAccount().getScriptHash()).intValue() < 100) {
+                        Toast.makeText(activity_ExchangePage.this, "You have no sufficient points", Toast.LENGTH_SHORT).show();
+                    }else {
+                        number = button1000.getText().toString();
+                        alert.show();
+                    }
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
 
-                number = button1000.getText().toString();
-                alert.show();
 
             }
         });
+
         button2000 = findViewById(R.id.button2000);
         button2000.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    if(Application.pointsOf(Application.getAccount().getScriptHash()).intValue() < 200){
+                        Toast.makeText(activity_ExchangePage.this, "You have no sufficient points", Toast.LENGTH_SHORT).show();
+                    }else {
+                        number = button2000.getText().toString();
+                        alert.show();
+                    }
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
 
-                number = button2000.getText().toString();
-                alert.show();
             }
         });
+
         final EditText inputServer = new EditText(this);
         inputServer.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25)});
         alert = new AlertDialog.Builder(this).setTitle("Create a name for your equipment").
@@ -86,17 +97,18 @@ public class activity_ExchangePage extends AppCompatActivity {
                 String text = inputServer.getText().toString();
 
                 try {
-                    if (number.equals("1000")) {
-                        Application.withdraw(10, text);
-                        Toast.makeText(activity_ExchangePage.this, "Button1000 ======" + text, Toast.LENGTH_SHORT).show();
+                    if (number.equals("100")) {
+                        Application.withdraw(100, text);
+//                        Toast.makeText(activity_ExchangePage.this, "Button100 ======" + text, Toast.LENGTH_SHORT).show();
                     } else {
-                        Application.withdraw(20, text);
-                        Toast.makeText(activity_ExchangePage.this, "Button2000 ======" + text, Toast.LENGTH_SHORT).show();
+                        Application.withdraw(200, text);
+//                        Toast.makeText(activity_ExchangePage.this, "Button200 ======" + text, Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
+
                 Intent intent = new Intent(activity_ExchangePage.this, activity_loadingPage.class);
                 intent.putExtra("Name", text);
                 startActivity(intent);
@@ -107,7 +119,7 @@ public class activity_ExchangePage extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent3 = new Intent(activity_ExchangePage.this, activity_timePicker.class);
+                Intent intent3 = new Intent(activity_ExchangePage.this, activity_ItemPage.class);
                 startActivity(intent3);
             }
         });
@@ -134,6 +146,7 @@ public class activity_ExchangePage extends AppCompatActivity {
                     Log.i("tag", "Number=== " + k);
                     TextView viewt = findViewById(textArray[k]);
                     String text = viewt.getText().toString();
+
                     Log.i("tag", "Name==== " + text);
                     try {
                         Application.sellOnSaleItem(Application.getAccount().getScriptHash(),text);
@@ -160,9 +173,9 @@ public class activity_ExchangePage extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(activity_ExchangePage.this, "===Name===" + token.getName() + "===Owner===" + token.getOwner() + "===Expiration==="
-                            + token.getExpiration() + "===Genre===" + token.getGenre() + "===IsOnSale===" + token.isOnSale() + "===Hp==="
-                            + token.getHp() + "===Attack===" + token.getAttack() + "===Defense===" + token.getDefense(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(activity_ExchangePage.this, "===Name===" + token.getName() + "===Owner===" + token.getOwner() + "===Expiration==="
+//                            + token.getExpiration() + "===Genre===" + token.getGenre() + "===IsOnSale===" + token.isOnSale() + "===Hp==="
+//                            + token.getHp() + "===Attack===" + token.getAttack() + "===Defense===" + token.getDefense(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

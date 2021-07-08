@@ -55,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -73,14 +73,14 @@
             android:layout_width="match_parent"
             android:layout_height="79dp"
             android:layout_gravity="top"
-            app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+            android:src="@drawable/giftbox" />
 
         <Button
             android:id="@+id/button1000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:text="1000" />
+            android:text="100" />
     </FrameLayout>
 
     <FrameLayout
@@ -98,21 +98,21 @@
             android:layout_width="match_parent"
             android:layout_height="78dp"
             android:layout_gravity="top"
-            app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+            android:src="@drawable/giftbox" />
 
         <Button
             android:id="@+id/button2000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:text="2000" />
+            android:text="200" />
     </FrameLayout>
 
     <Button
         android:id="@+id/buttonHomePage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HomePage"
+        android:text="My NFTs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -146,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:layout_gravity="bottom"
-            android:text="TextView" />
+            android:text="" />
     </FrameLayout>
 
     <FrameLayout
@@ -171,7 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="bottom"
-            android:text="TextView" />
+            android:text="" />
     </FrameLayout>
 
     <FrameLayout
@@ -197,7 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:layout_gravity="bottom"
-            android:text="TextView" />
+            android:text="" />
     </FrameLayout>
 
     <FrameLayout
@@ -224,7 +224,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_gravity="bottom"
-            android:text="TextView" />
+            android:text="" />
     </FrameLayout>
 
     <Button
@@ -239,5 +239,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.606" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="232dp"
+        android:layout_height="39dp"
+        android:text="Account Address:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/exchangePagePointTextView"
+        app:layout_constraintVertical_bias="0.069" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,18 +9,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.neotimingtest.sdk.Application;
 
 public class activity_createWallet extends AppCompatActivity {
-    TextView view;
 
-    Button button;
+    private TextView view;
+    private  Button button;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_wallet);
+
         Intent intent = getIntent();
         String wif1 = intent.getStringExtra("WIF");
         view = findViewById(R.id.textView31);

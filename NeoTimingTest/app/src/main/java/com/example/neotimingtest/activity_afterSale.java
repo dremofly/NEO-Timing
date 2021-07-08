@@ -10,13 +10,18 @@ import android.widget.Button;
 import com.example.neotimingtest.sdk.Application;
 
 public class activity_afterSale extends AppCompatActivity {
+
     private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_sale);
+
+        button = findViewById(R.id.button2);
         button.setEnabled(false);
-        CountDownTimer timer = new CountDownTimer(30 * 1000 * 60,1000) {
+
+        CountDownTimer timer = new CountDownTimer(20 * 1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 button.setText("My NFTs:" + millisUntilFinished / 1000 + " s");

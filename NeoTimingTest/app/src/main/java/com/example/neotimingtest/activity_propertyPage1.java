@@ -23,6 +23,7 @@ public class activity_propertyPage1 extends AppCompatActivity {
     private Button sell;
     private AlertDialog alert;
     private Token token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class activity_propertyPage1 extends AppCompatActivity {
         String s = intent.getStringExtra("Property");
         try {
            token = Application.tokenProperties(s);
-           Toast.makeText(this, "Name==="+token.getName(), Toast.LENGTH_SHORT).show();
+//           Toast.makeText(this, "Name==="+token.getName(), Toast.LENGTH_SHORT).show();
            TextView view18 = findViewById(R.id.textView18);
            view18.setText("Name======  "+token.getName());
            TextView view19 = findViewById(R.id.textView19);
@@ -51,11 +52,26 @@ public class activity_propertyPage1 extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
         sell = findViewById(R.id.button);
+        if(saleState()){
+            sell.setText("Cancel Sell");
+        }
         sell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alert.show();
+                if(saleState() == false){
+                    alert.show();
+                }else {
+                    try {
+                        Application.cancelOnSale(token.getOwner(),token.getName());
+                        Intent intent = new Intent(activity_propertyPage1.this,activity_ExchangePage.class);
+                        startActivity(intent);
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                }
             }
         });
 
@@ -76,5 +92,13 @@ public class activity_propertyPage1 extends AppCompatActivity {
                 startActivity(intent);
             }
         }).create();
+    }
+
+    private boolean saleState(){
+        if(token.isOnSale() == true) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }

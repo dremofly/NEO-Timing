@@ -1,7 +1,9 @@
 package com.example.neotimingtest;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -17,18 +19,21 @@ import java.math.BigInteger;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final int REQ_CODE = 10;
     private String wif;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //give permission to socket in main thread.
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-//
 
+
+        //Press the creat Button, start the connection with neo chain,and create a default account
         Button creatWalletButton = findViewById(R.id.create_wallet_button);
         creatWalletButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,30 +49,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         Button importWalletButton = findViewById(R.id.import_wallet_button);
         importWalletButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(MainActivity.this, activity_importWallet.class);
                 startActivity(intent);
             }
         });
-
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQ_CODE:
-                if(resultCode== RESULT_OK) {
-                    if(data != null)
-                    {
-                        Toast.makeText(getApplicationContext(), "未保存修改", Toast.LENGTH_SHORT).show();
+    public void finish() {
+        super.finish();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this).setTitle("Reminder").
+                setMessage("If you quit the app, you can not get any reward, are you sure to exit?").
+                setIcon(R.mipmap.neo_logo).
+                setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            Application.cancel();
+                            System.exit(0);
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
                     }
-                }
+                }).
+                setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        if (dialog != null) {
+            dialog.show();
         }
     }
-
 
 }

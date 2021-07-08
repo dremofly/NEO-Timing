@@ -20,25 +20,27 @@ public class activity_workPage extends AppCompatActivity {
     private TextView timeView ;
     private AlertDialog alertDialog;
     private int time;
-    private int count = 20;
+    private TextView view33;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work_page);
+
         cancel_button = findViewById(R.id.cancelButton);
         cancel_button.setEnabled(false);
         timeView = findViewById(R.id.timeTextView);
+        view33 = findViewById(R.id.textView33);
+        view33.setText("Account Address:" +Application.getAccount().getECKeyPair().getAddress());
 
         Intent intent = getIntent();
         time = intent.getIntExtra("Time",0);
+
         CountDownTimer timer = new CountDownTimer(time * 1000 * 60,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeView.setText("Your working time:" + millisUntilFinished / 1000 + " seconds");
-                count --;
             }
-
             @Override
             public void onFinish() {
                 Intent intent = new Intent(activity_workPage.this,activity_instructionPage.class);
@@ -52,12 +54,12 @@ public class activity_workPage extends AppCompatActivity {
             }
         };
         timer.start();
+
         CountDownTimer timer1 = new CountDownTimer(20 *1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 cancel_button.setText("cancel "+millisUntilFinished/1000+" s");
             }
-
             @Override
             public void onFinish() {
                 cancel_button.setEnabled(true);
@@ -81,8 +83,6 @@ public class activity_workPage extends AppCompatActivity {
                 setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent1 = new Intent(activity_workPage.this,activity_timePicker.class);
-//                        startActivity(intent1);
                         try {
                             Application.cancel();
                         } catch (Throwable throwable) {

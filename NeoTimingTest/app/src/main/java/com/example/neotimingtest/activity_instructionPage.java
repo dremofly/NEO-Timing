@@ -10,20 +10,21 @@ import android.widget.TextView;
 
 public class activity_instructionPage extends AppCompatActivity {
 
-    TextView title ;
-    int time ;
-    TextView instruction;
-    Button homepageButton ;
-    Button NftButton;
+    private TextView title ;
+    private int time ;
+    private TextView instruction;
+    private Button homepageButton ;
+    private Button NftButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instruction_page);
+
         Intent intent = getIntent();
         time = intent.getIntExtra("Time",0);
         instruction =  findViewById(R.id.InstructionTextView);
-        instruction.setText("Congragulations! You managed a " + time + " minutes' working task right now. And you earned " + time * 10 + " points which you can exchange for your pet equipments! Go check your properties in your NFT Storage." );
+        instruction.setText("Congragulations! You managed a " + time + " minutes' working task right now. And you earned " + time * 60 + " points which you can exchange for your pet equipments! Go check your properties in your NFT Storage." );
         homepageButton = findViewById(R.id.backtoWorkPageButton);
         homepageButton.setOnClickListener(new View.OnClickListener() {
             @Override

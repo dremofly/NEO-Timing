@@ -19,38 +19,26 @@ import java.math.BigInteger;
 public class activity_loadingPage extends AppCompatActivity {
 
     private Button openButton;
-
-    private TextView textView;
-
     private String name;
-
     private Token token;
-
     private TextView nameView;
-
     private TextView ownerView;
-
     private TextView genreView;
-
     private TextView expirationView;
-
     private TextView isOnSaleView;
-
     private TextView hpView;
-
     private TextView attackView;
-
     private TextView defenseView;
-
     private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_page);
+
         openButton = findViewById(R.id.buttonOpen);
         openButton.setEnabled(false);
-        textView = findViewById(R.id.textViewTime);
+        backButton = findViewById(R.id.button_back);
 
         Intent intent = getIntent();
         name = intent.getStringExtra("Name");
@@ -58,14 +46,13 @@ public class activity_loadingPage extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 openButton.setText("Open "+millisUntilFinished/1000+" s");
-                textView.setText(millisUntilFinished/1000 +" s");
             }
 
             @Override
             public void onFinish() {
                 openButton.setText("Open ");
-                textView.setText("");
                 openButton.setEnabled(true);
+                backButton.setVisibility(View.VISIBLE);
 
             }
         };
@@ -73,23 +60,10 @@ public class activity_loadingPage extends AppCompatActivity {
         openButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                try {
-//                    token = Application.tokenProperties(name);
-//                    Bundle b = new Bundle();
-//                    b.putSerializable("Serial",token);
-//                    Intent intent1 = new Intent(activity_loadingPage.this,activity_propertyPage.class);
-//                    startActivity(intent1);
-//                    Intent intent1 = new Intent(activity_loadingPage.this,activity_propertyPage.class);
-//                    startActivity(intent1);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                    Intent intent1 = new Intent(activity_loadingPage.this,activity_propertyPage.class);
-////                    intent1.putExtra("Name",name);
-//                    startActivity(intent1);
+
                 try {
                     token = Application.tokenProperties(name);
-                    Toast.makeText(activity_loadingPage.this, "Success"+token.getName(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity_loadingPage.this, "Success", Toast.LENGTH_LONG).show();
 
                     nameView = findViewById(R.id.textView6);
                     nameView.setText("Name==="+token.getName());
@@ -123,7 +97,8 @@ public class activity_loadingPage extends AppCompatActivity {
                 }
             }
         });
-        backButton = findViewById(R.id.button_back);
+
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
