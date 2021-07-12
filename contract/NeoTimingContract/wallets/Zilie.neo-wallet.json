@@ -1,0 +1,29 @@
+{
+  "name": "Zilie",
+  "version": "1.0",
+  "scrypt": {
+    "n": 16384,
+    "r": 8,
+    "p": 8,
+    "size": 64
+  },
+  "accounts": [
+    {
+      "address": "NL5bd4cJ9T3JrffZkWt5NzVTJhvecduHck",
+      "label": "Zilie",
+      "isDefault": true,
+      "lock": false,
+      "key": "6PYSiR8ZBzoDv7WTgyJJkuZyTYmB7n9o4GVjTkMigukki2X2Y83YyAW2DA",
+      "contract": {
+        "script": "DCECHjjtcDl4MYlcozvazIIHnKjcJSy3LGuE9KLSP4P15btBVuezJw==",
+        "parameters": [
+          {
+            "name": "signature",
+            "type": "Signature"
+          }
+        ],
+        "deployed": false
+      }
+    }
+  ]
+}

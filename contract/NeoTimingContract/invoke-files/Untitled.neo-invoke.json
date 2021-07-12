@@ -1,0 +1,18 @@
+[
+  {
+    "contract": "NameService",
+    "operation": "random"
+  },
+  {
+    "contract": "NameService",
+    "operation": "randomGenre"
+  },
+  {
+    "contract": "NameService",
+    "operation": "randomGenre"
+  },
+  {
+    "contract": "NameService",
+    "operation": "randomGenre"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "name": "alice",
+  "version": "1.0",
+  "scrypt": {
+    "n": 16384,
+    "r": 8,
+    "p": 8,
+    "size": 64
+  },
+  "accounts": [
+    {
+      "address": "NQrjwLtRSvRYpURt944MMCwnwcfEGx5sfm",
+      "label": "alice",
+      "isDefault": true,
+      "lock": false,
+      "key": "6PYUCcB8oSzf25icyhsow27ct9Q12PLx2VPCoUveffHtzHpqtjqDnSjk3S",
+      "contract": {
+        "script": "DCECrUcRg0yMfzLiV5mM4lv69BYA77N5milxaT/mlsO3sAJBVuezJw==",
+        "parameters": [
+          {
+            "name": "signature",
+            "type": "Signature"
+          }
+        ],
+        "deployed": false
+      }
+    }
+  ]
+}
