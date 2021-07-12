@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="DefActivityAnimation">
-        <item name="android:activityOpenExitAnimation">@anim/exit_to_left</item>
-        <item name="android:activityOpenEnterAnimation">@anim/enter_from_right_to_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/exit_to_right</item>
-        <item name="android:activityCloseEnterAnimation">@anim/enter_from_left_to_right</item>
-    </style>
-</resources>
