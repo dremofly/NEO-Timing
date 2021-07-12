@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">NeoTimingTest</string>
+    <string name="button_import">Import a wallet</string>
+    <string name="button_create">Create a wallet</string>
+    <string name="Logo_homepage">NeoTiming</string>
+    <string name="Slogan">Manage your own time in NeoTiming...</string>
+    <string name="showWorkTime">Work Time : 0 mins</string>
+    <string name="TriggerButton">Start Working</string>
+    <string name="Time">0</string>
+    <string name="CancelButton">Cancel</string>
+    <string name="Title">Instruction</string>
+    <string name="Content">Congragulations!</string>
+    <string name="button_backtoWorkPage">Homepage</string>
+    <string name="button_backToItemPage">My NFTs</string>
+    <string name="nftButton">My NFTs</string>
+    <string name="PointTextview">Total Points: 0</string>
+    <string name="total_points_x">Total Points: x</string>
+    <string name="exchange">Exchange</string>
+    <string name="exchang_page_total_points_0">Total Points: 0</string>
+</resources>
