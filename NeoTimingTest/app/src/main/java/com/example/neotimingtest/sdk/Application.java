@@ -29,7 +29,8 @@ public class Application {
     //每次重新部署合约都需要一个新的合约地址
     //0x88d7efe029d9741690e3f91a2745062a636b21ec NameService合约地址
     //0xcf821812cba65f7219654ab9e1a29ed208ef8bb9 改完withdraw和 register之后的合约地址
-    private static final String contractAddress = "0x32f78d5f43379c519fb9d6970c69c56b9713d809";
+    //0x32f78d5f43379c519fb9d6970c69c56b9713d809
+    private static final String contractAddress = "0x9a57bcd856db097fb1332e6faa9eb1b09904e4ec";
 
     private static Neow3j neow3j;
 
@@ -41,15 +42,6 @@ public class Application {
     //每次重新部署合约后，需要给该地址转gas为了执行合约
     private static final String publickeyAddress = "NicfNxmzhd5f36z7N5Nap3HaT8Z5WB7WKq";
 
-    private static String[] accountInfo;
-
-    private static final String[] accountsWIF = {
-            "L5YKUrTdJoF8gEpwqEtgTuggmajytG5hQwc4W1HHQuhon2thHvca",
-        "L1RYBYEKL4us8hxSVYdPaWr6y6yCH8v3QisvTq4yXC7fdeaVp2ms",
-        "L3yKw21GZ2ETBiWHf1KmQFG8B3DutH1YSwMppyYQiUsuVh3FBnjv",
-        "KyoTnS2SNPWK2ZSVfWBcgRvfzhYXAM31zqjULZVAC1yGsFvh2iyQ",
-        "KxS4jkVd89S1QFrVjVdBQxoDZtjdyacmVG3ESSRpkWRsDPyJCRQW"};
-
     public static void importWallet(String wif) {
         account = Account.fromWIF(wif);
         wallet = Wallet.withAccounts(account);
@@ -57,14 +49,11 @@ public class Application {
     }
 
     public static String createAccount() throws Throwable {
-
-
-            Account account2 = Account.create();
-            String wif = account2.getECKeyPair().exportAsWIF();
+        Account account2 = Account.create();
+        String wif = account2.getECKeyPair().exportAsWIF();
         System.out.println(account2.getECKeyPair().getPublicKey());
         System.out.println(account2.getECKeyPair().getAddress());
         System.out.println(account2.getECKeyPair().exportAsWIF());
-
         BigInteger amount = BigInteger.valueOf(1000);
 //            NeoSendRawTransaction response = new GasToken(neow3j)
 //                    .transferFromDefaultAccount(wallet, Hash160.fromAddress(account2.getAddress()),amount )
@@ -73,13 +62,11 @@ public class Application {
 //                    .additionalNetworkFee(1L)
 //                    .sign()
 //                    .send();
-
-            BigInteger res = new GasToken(neow3j).getBalanceOf(account2);
+        BigInteger res = new GasToken(neow3j).getBalanceOf(account2);
             System.out.println(res);
             return wif;
         }
 
-        // 转账
 
     public static void trigger(int time) throws Throwable {
         time = time *60;
@@ -132,6 +119,7 @@ public class Application {
         return (BigInteger) response.getInvocationResult().getStack().get(0).getValue();
 
     }
+
     public static BigInteger banlanceOf(Hash160 address) throws Throwable {
         String function = "balanceOf";
         checkConnection();
@@ -181,6 +169,7 @@ public class Application {
                 .sign()
                 .send();
     }
+
     public static void cancelOnSale(Hash160 address, String name) throws Throwable {
         String function = "cancelOnSale";
         ContractParameter usrParam = ContractParameter.hash160(address);
@@ -290,7 +279,6 @@ public class Application {
         int count = res.size() - 1;
         while(res.get(count) instanceof ByteStringStackItem) {
             ByteStringStackItem rr = (ByteStringStackItem) res.get(count);
-
             if(tokenProperties(rr.getString()).isOnSale()){
                 System.out.println("=======" +  tokenProperties(rr.getString()).isOnSale() + "=======");
                 OnSaleItemArrayList.add(rr.getString());
@@ -306,7 +294,6 @@ public class Application {
         String function = "transferItem";
         ContractParameter usrParam = ContractParameter.hash160(to);
         ContractParameter nameParam = ContractParameter.string(name);
-
         checkConnection();
         TransactionBuilder txBuilder = new SmartContract(scriptHash, neow3j)
                 .invokeFunction(function, usrParam,nameParam);
@@ -329,7 +316,6 @@ public class Application {
     public static Account getAccount(){
         return account;
     }
-
 
 
     public static void main(String[] args) throws Throwable {
@@ -418,20 +404,4 @@ public class Application {
 
 }
 
-
-//    public static void main(String[] args) {
-//        Neow3j neow3j = Neow3j.build(new HttpService("http://127.0.0.1:50012"));
-//        System.out.println(neow3j);
-//        try {
-//            neow3j.subscribeToNewBlocksObservable(true)
-//                    .subscribe((blockReqResult) -> {
-//                        System.out.println("blockIndex: " + blockReqResult.getBlock().getIndex());
-//                        System.out.println("hashId: " + blockReqResult.getBlock().getHash());
-//                        System.out.println("confirmations: " + blockReqResult.getBlock().getConfirmations());
-//                        System.out.println("transactions: " + blockReqResult.getBlock().getTransactions());
-//                    });
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 

@@ -23,6 +23,7 @@ public class activity_propertyPage1 extends AppCompatActivity {
     private Button sell;
     private AlertDialog alert;
     private Token token;
+    private Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,14 @@ public class activity_propertyPage1 extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        back = findViewById(R.id.button9);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity_propertyPage1.this,activity_ItemPage.class);
+                startActivity(intent);
+            }
+        });
 
 
         sell = findViewById(R.id.button);
@@ -87,7 +96,7 @@ public class activity_propertyPage1 extends AppCompatActivity {
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
-                Intent intent = new Intent(activity_propertyPage1.this,activity_ExchangePage.class);
+                Intent intent = new Intent(activity_propertyPage1.this,activity_ItemPage.class);
                 intent.putExtra("Price",text);
                 startActivity(intent);
             }
